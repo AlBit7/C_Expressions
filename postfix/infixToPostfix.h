@@ -4,6 +4,7 @@
 #define LUNGHEZZA_MASSIMA_NUMERO 20
 #endif
 
+#define ULTIMO_ELEMENTO -8
 #define numero(carattere) (carattere >= '0' && carattere <= '9') ? 1 : 0
 
 void unisci(char *stringa, char carattere)
@@ -47,15 +48,27 @@ int numerizza(char symbol) // questo serve per capire che operazione sto eseguen
     }
 }
 
-int priorita(char x)
+int priorita(char symbol)
 {
-    if (x == '+' || x == '-')
+
+    switch (symbol)
+    {
+    case '+':
+    case '-':
         return 2;
-    if (x == '*' || x == '/')
+        break;
+    case '*':
+    case '/':
         return 3;
-    if (x == '^')
+        break;
+    case '^':
         return 4;
-    return 0;
+        break;
+
+    default:
+        return 0;
+        break;
+    }
 }
 
 /**
@@ -157,6 +170,8 @@ void init(char *str, int *postfix)
         *postfix = numerizza(pop(&tmp)); // inserisco tutti gli elementi
         ++postfix;
     }
+
+    *postfix = ULTIMO_ELEMENTO;
 
     free(tmp);
 }
