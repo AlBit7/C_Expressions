@@ -5,7 +5,7 @@
 #endif
 
 #define ULTIMO_ELEMENTO -8
-#define numero(carattere) (carattere >= '0' && carattere <= '9') ? 1 : 0
+#define numero(carattere) (carattere >= '0' && carattere <= '9' || carattere == '.') ? 1 : 0
 
 void unisci(char *stringa, char carattere)
 {
@@ -17,7 +17,7 @@ void unisci(char *stringa, char carattere)
     *stringa++ = 0;
 }
 
-int numerizza(char symbol) // questo serve per capire che operazione sto eseguendo senza avere l'espressione in formato stringa
+double numerizza(char symbol) // questo serve per capire che operazione sto eseguendo senza avere l'espressione in formato stringa
 {
 
     switch (symbol)
@@ -38,9 +38,13 @@ int numerizza(char symbol) // questo serve per capire che operazione sto eseguen
         return -3;
         break;
     case '(':
+    case '[':
+    case '{':
         return -2;
         break;
     case ')':
+    case ']':
+    case '}':
         return -1;
         break;
     default:
@@ -48,7 +52,7 @@ int numerizza(char symbol) // questo serve per capire che operazione sto eseguen
     }
 }
 
-int priorita(char symbol)
+double priorita(char symbol)
 {
 
     switch (symbol)
@@ -93,7 +97,7 @@ int priorita(char symbol)
  *   -  pop di tutti gli elementi da inserire nel postfix
 */
 
-void init(char *str, int *postfix)
+void init(char *str, double *postfix)
 {
 
     Stack tmp = NULL;
@@ -105,13 +109,17 @@ void init(char *str, int *postfix)
         {
 
         case '(':
-            push(&tmp, *str);
+        case '[':
+        case '{':
+            push(&tmp, 40);
             break;
 
         case ')':
+        case ']':
+        case '}':
         {
-            int t = 0;
-            while ((t = pop(&tmp)) != '(') // fino a che trovo una parentesi aperta
+            double t = 0;
+            while ((t = pop(&tmp)) != (double)'(') // fino a che trovo una parentesi aperta
             {
                 *postfix = numerizza(t); // inserisco gli elementi nel postfix
                 ++postfix;
@@ -136,7 +144,7 @@ void init(char *str, int *postfix)
                         break;
                 }
 
-                sscanf(num, "%d", postfix++); // tmp viene convertito in un int
+                sscanf(num, "%lf", postfix++); // tmp viene convertito in un int
             }
             else // operatore
             {
