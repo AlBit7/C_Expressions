@@ -7,33 +7,28 @@
 
 typedef struct node
 {
-    int valore;
+    double valore;
     struct node *next;
 } node;
 
 typedef node *Stack;
 
-int push(Stack *stack, int vaolore)
+void push(Stack *stack, double vaolore)
 {
     node *nuovoElemento = (node *)malloc(sizeof(node));
-
-    if (nuovoElemento == NULL)
-        return 0;
 
     nuovoElemento->valore = vaolore;
     nuovoElemento->next = *stack;
     *stack = nuovoElemento;
-
-    return 1;
 }
 
-int pop(Stack *stack)
+double pop(Stack *stack)
 {
 
     if (*stack == NULL)
         return STACK_VUOTO;
 
-    int ris = (*stack)->valore;
+    double ris = (*stack)->valore;
 
     node *tmp = *stack;
     *stack = (*stack)->next;
@@ -42,7 +37,7 @@ int pop(Stack *stack)
     return ris;
 }
 
-int cima(Stack *stack)
+double cima(Stack *stack)
 {
     if (*stack == NULL)
         return STACK_VUOTO;
