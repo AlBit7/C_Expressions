@@ -1,4 +1,6 @@
-#pragma once
+#ifndef _STACK_
+#define _STACK_
+
 #include <stdlib.h>
 
 #ifndef STACK_VUOTO
@@ -13,34 +15,8 @@ typedef struct node
 
 typedef node *Stack;
 
-void push(Stack *stack, double vaolore)
-{
-    node *nuovoElemento = (node *)malloc(sizeof(node));
+void push(Stack *stack, double vaolore);
+double pop(Stack *stack);
+double cima(Stack *stack);
 
-    nuovoElemento->valore = vaolore;
-    nuovoElemento->next = *stack;
-    *stack = nuovoElemento;
-}
-
-double pop(Stack *stack)
-{
-
-    if (*stack == NULL)
-        return STACK_VUOTO;
-
-    double ris = (*stack)->valore;
-
-    node *tmp = *stack;
-    *stack = (*stack)->next;
-    free(tmp);
-
-    return ris;
-}
-
-double cima(Stack *stack)
-{
-    if (*stack == NULL)
-        return STACK_VUOTO;
-
-    return (*stack)->valore;
-}
+#endif
