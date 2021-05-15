@@ -1,12 +1,13 @@
 #include "stack.h"
+#include <math.h>
 
 #ifndef ULTIMO_ELEMENTO
 #define ULTIMO_ELEMENTO -8
 #endif
 
-int calcola(int op, int e1, int e2)
+double calcola(double op, double e1, double e2)
 {
-    switch (op)
+    switch ((int)op)
     {
     case -7:
         return e1 + e2;
@@ -21,18 +22,16 @@ int calcola(int op, int e1, int e2)
         return e1 / e2;
         break;
     case -3:
-        return e1 ^ e2;
+        return pow(e1, e2);
         break;
 
     default:
         return 0;
         break;
     }
-
-    
 }
 
-int risolvi(int *postfix)
+double risolvi(double *postfix)
 {
     Stack tmp = NULL;
     for (; *postfix != -8; ++postfix)
@@ -45,8 +44,8 @@ int risolvi(int *postfix)
         else
         {
 
-            int e2 = pop(&tmp); // elemento a destra
-            int e1 = pop(&tmp); // elemento a sinistra
+            double e2 = pop(&tmp); // elemento a destra
+            double e1 = pop(&tmp); // elemento a sinistra
 
             push(&tmp, calcola(*postfix, e1, e2)); // push nello stack del risultato
         }
