@@ -2,7 +2,8 @@
 #include "infixToPostfix.h"
 #include "solvePostfix.h"
 
-#define NUMERO_TEST 1
+#define NUMERO_TEST 4
+#define BUFFER 250
 
 typedef struct test
 {
@@ -17,15 +18,21 @@ int main()
 
     TEST prova[NUMERO_TEST] = {
 
-        {.espressione = "",
+        {.espressione = "8",
          .risultato = 8},
+        {.espressione = "90.4-6.87",
+         .risultato = 83.53},
+        {.espressione = "36.5+(49-23*2)^2",
+         .risultato = 45.5},
+        {.espressione = "(2.1^2+5.2-7.2)*7.1",
+         .risultato = 17.111},
 
     };
 
     for (int i = 0; i < NUMERO_TEST; ++i)
     {
 
-        double *parsato = (double *)malloc(500);
+        double *parsato = (double *)malloc(BUFFER);
         init(prova[i].espressione, parsato); // infix --> postfix
         double ris = risolvi(parsato);
 
