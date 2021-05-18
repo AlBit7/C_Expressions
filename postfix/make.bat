@@ -1,4 +1,4 @@
-@REM @echo off
+@echo off
 
 :: definisco le variabili
 @REM set PATH=%0\..\
