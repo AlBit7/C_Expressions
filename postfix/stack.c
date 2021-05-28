@@ -1,5 +1,11 @@
 #include "stack.h"
 
+typedef struct myNode
+{
+    double valore;
+    struct myNode *next;
+} node;
+
 void push(Stack *stack, double vaolore)
 {
     node *nuovoElemento = (node *)malloc(sizeof(node));
