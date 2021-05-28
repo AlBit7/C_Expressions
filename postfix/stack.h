@@ -7,11 +7,7 @@
 #define STACK_VUOTO -8
 #endif
 
-typedef struct node
-{
-    double valore;
-    struct node *next;
-} node;
+typedef struct myNode node;
 
 typedef node *Stack;
 
