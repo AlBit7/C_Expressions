@@ -11,7 +11,7 @@ $CC -c solvePostfix.c
 $CC -c stack.c
 
 # linko tutti i file oggetto con le librerie necessarie
-$CC main.o infixToPostfix.o solvePostfix.o stack.o -o %out
+$CC main.o infixToPostfix.o solvePostfix.o stack.o -lm -o %out
 
 # elimino tutti i file oggetto
 rm stack.o
